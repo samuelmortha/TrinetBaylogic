@@ -120,8 +120,6 @@ T7R
 U9Q
 UC2
 
-
-
 set search_path to files;
 
 drop function if exists get_ny_dbl_data_v1();
@@ -481,3 +479,48 @@ $$ language plpgsql;
 /*
 select * from files.get_ny_dbl_data_v1();
 */
+
+KXV	2018-01-22
+ML4	2018-01-23
+T6H	2018-01-16
+T75	2018-01-18
+
+
+
+
+
+
+
+
+
+
+--select company,t2_comp_term_dt from p.ps_t2_cloptn_effdt where company in ('KXV','ML4','T6H','T75')
+--and t2_comp_term_dt is not null
+
+select l.state, l.setid, l.eff_status,l.effdt, l.descr, l.descrshort, l.address1 from p.ps_location_tbl l 
+where l.state = 'NY' and l.location in  (
+select distinct j.location from p.ps_job j ,p.ps_pers_data_effdt pde
+where j.company in ('U9Q','UC2')--'T7R',
+	 and j.emplid = pde.emplid
+  and j.empl_status in ('A','L','P','S')  -- actives only, no terms
+  and j.paygroup <> 'NP' -- trusted advisor
+  and j.company <> '31T'  -- this is a test company
+  and j.emplid not like 'C%'  -- this omits cobra employees
+  and (j.empl_class not in ('K1','K1E','K1D') or j.empl_class is null) -- omit K1 employees -- RALCAF-3201
+  and pde.effdt = (select max(pde1.effdt) from p.ps_pers_data_effdt pde1
+                    where pde.emplid       = pde1.emplid
+                      and pde1.effdt      <= '2018-01-23')
+  and j.effdt = (select max(j1.effdt) from p.ps_job j1
+                where j.emplid       = j1.emplid
+                  and j.empl_rcd     = j1.empl_rcd
+                  and j.company      = j1.company
+                  and j.location     = j1.location
+                  and j1.effdt      <= '2018-01-23')
+ and j.effseq = (select max(j2.effseq) from p.ps_job j2
+                  where j.emplid      = j2.emplid
+                    and j.empl_rcd    = j2.empl_rcd
+                  	and j.company     = j2.company
+                  	and j.location    = j2.location
+                    and j2.effdt      = j.effdt)
+-- group by rollup(j.company,j.location);
+)
