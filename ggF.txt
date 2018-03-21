@@ -317,7 +317,8 @@ select
 	,tot.dbl_males as pfl_males
 	,tot.dbl_females as pfl_females
 	,tot.covered_annual_payroll
-	,'ADD' as status
+	,case when (g.t2_comp_term_dt < p_effective_date) then 'CANCEL'
+		else 'ADD' end as status
 	,p_effective_date as status_date
 	,case when (g.t2_comp_term_dt < p_effective_date) then 'Client''s Request'
 		else ' ' end as cancel_reason
