@@ -157,19 +157,11 @@ where a.location = j.location
   and j.effdt = (select max(j1.effdt) from p.ps_job j1
                 where j.emplid       = j1.emplid
                   and j.empl_rcd     = j1.empl_rcd
-                  and j.company      = j1.company
-                  and j.location     = j1.location
-                  and j.empl_status  = j1.empl_status
-                  and j.paygroup     = j1.paygroup
                   and j1.effdt      <= p_effective_date)
  and j.effseq = (select max(j2.effseq) from p.ps_job j2
                   where j.emplid      = j2.emplid
                     and j.empl_rcd    = j2.empl_rcd
-                  	and j.company     = j2.company
-                  	and j.location    = j2.location
-                  	and j.empl_status = j2.empl_status
-                  	and j.paygroup    = j2.paygroup
-                    and j2.effdt      = j.effdt)
+                  	and j2.effdt      = j.effdt)
 group by rollup(j.company,j.location);
 
 -- STEP 3 GET THE COMPANY TOTALS CALCULATED IN STEP 2
@@ -317,10 +309,10 @@ select
 	,tot.dbl_males as pfl_males
 	,tot.dbl_females as pfl_females
 	,tot.covered_annual_payroll
-	,case when (g.t2_comp_term_dt < p_effective_date) then 'CANCEL'
+	,case when (g.t2_comp_term_dt > p_effective_date) then 'CANCEL'
      		else 'ADD' end as status
 	,p_effective_date as status_date
-	,case when (g.t2_comp_term_dt < p_effective_date) then 'Client''s Request'
+	,case when (g.t2_comp_term_dt > p_effective_date) then 'Client''s Request'
 		else ' ' end as cancel_reason
 from ny_dbl_work_locations_data_temp  a
 	,p.ps_t2_cloptn_effdt g
