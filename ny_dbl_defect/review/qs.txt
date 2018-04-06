@@ -1,0 +1,154 @@
+Sam,  
+
+I noticed that you logged 160 hours so far for this story and I also inquired about this a month ago. 
+Was this something identified as a complex one since there are no story points? 
+I would like to understand why this is taking longer (1 month Dev time) to fix – 
+Is this a requirement clarification or taking longer to troubleshoot since the root cause is already specified as SQL filter excluded remote locations.
+ 
+ 
+Bill, I recall this query was provided by George Corona last quarter originally which went through UAT and QE as well. 
+ 
+Shyla, please note this item for next retrospective meeting as well. 
+ 
+Regards,
+Sumanth
+
+
+scrum, retrospective, spriint planning, vdi issues, research time, debuuging, complex, clarification
+
+Hi Sumanth,
+
+I am logging the total hours spent in the day, this includes hours worked on the story, scrum call, retrospective, sprint planning, research done and VDI issues.
+
+Also the issue is a bit complex to me as I am new to the PeopleSoft schema.
+
+And the root cause is specified after debugging into the issue.
+
+Right now, the sql and Java code are updated and being reviewed.
+
+
+Thank you,
+Sam.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Q1 : I was informed that Subquery needs to have the filters of outer query ? 
+Updated by me :
+select distinct l.location, l.descr, l.address1, l.address2, l.city, l.state, l.postal 
+from p.ps_location_tbl l
+where l.state = 'NY'
+	and l.setid = 'USPEO'
+	and l.eff_status = 'A'
+	and l.effdt = (select max(l1.effdt) from p.ps_location_tbl l1
+					where l.setid = l1.setid
+						and l.location = l1.location
+						and l.state = l1.state
+						and l.eff_status = l1.eff_status
+						and l1.effdt <= p_effective_date);
+						
+select 
+	j.company,
+	j.location, 
+	count(+1) as total_employees, 
+	count(case when pde.sex = 'M' or pde.sex = 'U' then +1 end) as dbl_males, 
+	count(case when pde.sex = 'F' then +1 end) as dbl_females,
+	sum(j.annual_rt) as covered_annual_payroll
+from ny_dbl_work_locations_data_temp a , p.ps_job j ,p.ps_pers_data_effdt pde
+where a.location = j.location
+  and j.emplid = pde.emplid
+  and j.empl_status in ('A','L','P','S')  -- actives only, no terms
+  and j.paygroup <> 'NP' -- trusted advisor
+  and j.company <> '31T'  -- this is a test company
+  and j.emplid not like 'C%'  -- this omits cobra employees
+  and (j.empl_class not in ('K1','K1E','K1D') or j.empl_class is null) -- omit K1 employees -- RALCAF-3201
+  and pde.effdt = (select max(pde1.effdt) from p.ps_pers_data_effdt pde1
+                    where pde.emplid       = pde1.emplid
+                      and pde1.effdt      <= p_effective_date)
+  and j.effdt = (select max(j1.effdt) from p.ps_job j1
+                where j.emplid       = j1.emplid
+                  and j.empl_rcd     = j1.empl_rcd
+                  and j.company      = j1.company
+                  and j.location     = j1.location
+                  and j.empl_status  = j1.empl_status
+                  and j.paygroup     = j1.paygroup
+                  and j.empl_class 	 = j1.empl_class
+                  and j1.effdt      <= p_effective_date)
+ and j.effseq = (select max(j2.effseq) from p.ps_job j2
+                  where j.emplid      = j2.emplid
+                    and j.empl_rcd    = j2.empl_rcd
+                  	and j.company     = j2.company
+                  	and j.location    = j2.location
+                  	and j.empl_status = j2.empl_status
+                  	and j.paygroup    = j2.paygroup
+                  	and j.empl_class  = j2.empl_class
+                    and j2.effdt      = j.effdt)
+group by rollup(j.company,j.location);
+						
+-					and j.company      = j1.company
+-                  and j.location     = j1.location
+-                  and j.empl_status  = j1.empl_status
+-                  and j.paygroup     = j1.paygroup
+
+
+						
+Q2 : p_effective_date is usually the date that we generate the file, we still did not include the policy start date in the query.
+
+A) does 
+case when (g.t2_comp_term_dt > p_effective_date) then 'CANCEL'
+mean the future cancellation 
+
+case when (g.t2_comp_term_dt > p_effective_date) then 'Client''s Request'
+						
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
