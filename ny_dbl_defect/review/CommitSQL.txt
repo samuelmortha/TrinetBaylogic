@@ -327,7 +327,7 @@ where c.eff_status = 'A'
 	and c.company = b.estabid
 	and c.company = g.company
 	and c.pf_client = g.pf_client
-	and (g.t2_comp_term_dt is null or (g.t2_comp_term_dt > p_policy_start_date))
+	and (g.t2_comp_term_dt is null or g.t2_comp_term_dt > p_policy_start_date)
 	and c.effdt = (select max(c1.effdt) from p.ps_company_tbl c1
 					where c.company    = c1.company
 					 and c1.effdt    <= p_effective_date)
@@ -347,5 +347,5 @@ $$ language plpgsql;
 
 
 /*
-select * from files.get_ny_dbl_data_v1('2018-01-23');
+select * from files.get_ny_dbl_data_v1('2018-01-01','2018-01-23');
 */
