@@ -157,19 +157,11 @@ where a.location = j.location
   and j.effdt = (select max(j1.effdt) from p.ps_job j1
                 where j.emplid       = j1.emplid
                   and j.empl_rcd     = j1.empl_rcd
-                  and j.company      = j1.company
-                  and j.location     = j1.location
-                  and j.empl_status  = j1.empl_status
-                  and j.paygroup     = j1.paygroup
                   and j1.effdt      <= p_effective_date)
  and j.effseq = (select max(j2.effseq) from p.ps_job j2
                   where j.emplid      = j2.emplid
                     and j.empl_rcd    = j2.empl_rcd
-                  	and j.company     = j2.company
-                  	and j.location    = j2.location
-                  	and j.empl_status = j2.empl_status
-                  	and j.paygroup    = j2.paygroup
-                    and j2.effdt      = j.effdt)
+                  	and j2.effdt      = j.effdt)
 group by rollup(j.company,j.location);
 
 -- STEP 3 GET THE COMPANY TOTALS CALCULATED IN STEP 2
@@ -335,6 +327,7 @@ where c.eff_status = 'A'
 	and c.company = b.estabid
 	and c.company = g.company
 	and c.pf_client = g.pf_client
+	and (g.t2_comp_term_dt is null or (g.t2_comp_term_dt > '2018-01-01'))
 	and c.effdt = (select max(c1.effdt) from p.ps_company_tbl c1
 					where c.company    = c1.company
 					 and c1.effdt    <= p_effective_date)
