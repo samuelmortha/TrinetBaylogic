@@ -1,0 +1,15 @@
+Fri Apr 13 07:43:03 EDT 2018: TriNet-TriNet-Ansi5010Convert Starting
+Fri Apr 13 07:43:03 EDT 2018: TriNet-TriNet-Ansi5010Convert - Clear snapshot and exception tables.
+Fri Apr 13 07:43:06 EDT 2018: TriNet-TriNet-Ansi5010Convert - Create list of employees to convert to /tmp/convert-employess-1oYAUL.
+Fri Apr 13 07:43:07 EDT 2018: TriNet-TriNet-Ansi5010Convert - Refresh passport group number table.
+0
+Fri Apr 13 07:45:31 EDT 2018: TriNet-TriNet-Ansi5010Convert - Run convert in parallel.
+Fri Apr 13 07:45:31 EDT 2018: TriNet-TriNet-Ansi5010Convert - Copy SOI data.
+0
+Fri Apr 13 07:47:35 EDT 2018: TriNet-TriNet-Ansi5010Convert - Check error log target/TriNet-TriNet-Ansi5010Convert-Errors-20180413-074303.log for errors.
+Fri Apr 13 07:47:35 EDT 2018: TriNet-TriNet-Ansi5010Convert - Remove empty error log file target/TriNet-TriNet-Ansi5010Convert-Errors-20180413-074303.log
+Fri Apr 13 07:47:35 EDT 2018: TriNet-TriNet-Ansi5010Convert - Run vendor specific calculations.
+0
+Fri Apr 13 07:47:41 EDT 2018: TriNet-TriNet-Ansi5010Convert - Check exception table for errors.
+Fri Apr 13 07:47:41 EDT 2018: TriNet-TriNet-Ansi5010Convert - Run analyze
+Fri Apr 13 07:49:21 EDT 2018: TriNet-TriNet-Ansi5010Convert Done
