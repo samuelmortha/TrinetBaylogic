@@ -1,0 +1,13 @@
+transmissions.file_definition table :
+
+file_definition_id	job_id	vendor_id	business_id	client_id	name		status		exchange	jira_stories	version	cutoff	databases	functions	repo_location	spec_location	contents	sys_period
+26			126	11		2		1		VSP 834 X4	active						1.0												["2018-04-09 09:57:25.317817-04",)
+
+select * from ansi5010.file_definition where file_definition_id in
+(select file_definition_id from transmissions.file_definition where name like '%VSP%');
+
+select * from ansi5010.file_instance where file_instance_id in 
+(select file_instance_id from transmissions.file_instance where file_definition_id = 26); -- 998, 1004, 1005
+
+select * from ansi5010.load_file_record_data(1005);
+select * from ansi5010.file_instance_file_record where file_instance_id = 1005
