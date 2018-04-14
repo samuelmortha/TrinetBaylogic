@@ -369,4 +369,79 @@ select company into temp still_missing_clients from ny_dbl_vendor_data_temp exce
 
 select company from still_missing_clients;
 
+create temp table ny_dbl_vendor_data_temp1 (company text);
+insert into ny_dbl_vendor_data_temp1 values('BTS'),('EA1'),('GHS'),('HFA'),('IKO'),('IMF'),('LHF'),('NNI'),('O7D'),('OOE'),('T7R'),('TLI'),('U13'),('U23'),('U9Q'),('UC2');
+select company from ny_dbl_vendor_data_temp except select company from 
+
+
+
+
+
+
+
+create temp table ny_dbl_vendor_data_temp1 (company text);
+insert into ny_dbl_vendor_data_temp1 values('BTS'),('EA1'),('GHS'),('HFA'),('IKO'),('IMF'),('LHF'),('NNI'),('O7D'),('OOE'),('T7R'),('TLI'),('U13'),('U23'),('U9Q'),('UC2');
+select company from ny_dbl_vendor_data_temp1 except select company from ny_dbl_ee_counts_data_temp1;
+
+
+select distinct j.company from ny_dbl_work_locations_data_temp1 a , p.ps_job j ,p.ps_pers_data_effdt pde
+where j.company in (select company from ny_dbl_vendor_data_temp1) and a.location = j.location   and j.emplid = pde.emplid
+  and j.empl_status in ('A','L','P','S')  -- actives only, no terms
+  and j.paygroup <> 'NP' -- trusted advisor
+  and j.company <> '31T'  -- this is a test company
+  and j.emplid not like 'C%'  -- this omits cobra employees
+  and (j.empl_class not in ('K1','K1E','K1D') or j.empl_class is null) -- omit K1 employees -- RALCAF-3201
+  and pde.effdt = (select max(pde1.effdt) from p.ps_pers_data_effdt pde1
+                    where pde.emplid       = pde1.emplid
+                      and pde1.effdt      <= '2018-01-24')
+  and j.effdt = (select max(j1.effdt) from p.ps_job j1
+                where j.emplid       = j1.emplid
+                  and j.empl_rcd     = j1.empl_rcd
+                  and j.company      = j1.company
+                  and j.location     = j1.location
+                  and j.empl_status  = j1.empl_status
+                  and j.paygroup     = j1.paygroup
+                  and j1.effdt      <= '2019-01-24')
+ and j.effseq = (select max(j2.effseq) from p.ps_job j2
+                  where j.emplid      = j2.emplid
+                    and j.empl_rcd    = j2.empl_rcd
+                  	and j.company     = j2.company
+                  	and j.location    = j2.location
+                  	and j.empl_status = j2.empl_status
+                  	and j.paygroup    = j2.paygroup
+                    and j2.effdt      = j.effdt)
+group by rollup(j.company,j.location);
+
+U13
+U9Q
+T7R
+UC2
+U23
+
+
+select distinct company,max(effdt) from p.ps_job j
+where j.company in (select company from ny_dbl_vendor_data_temp1) -- ('U13','U9Q','T7R','UC2','U23') 
+and j.location in (select location from ny_dbl_work_locations_data_temp1) 
+and j.empl_status in ('A','L','P','S')  -- actives only, no terms
+  and j.paygroup <> 'NP' -- trusted advisor
+  and j.company <> '31T'  -- this is a test company
+  and j.emplid not like 'C%'  -- this omits cobra employees
+  and (j.empl_class not in ('K1','K1E','K1D') or j.empl_class is null)
+group by company
+
+IKO	2017-09-01
+LHF	2017-09-01
+IMF	2017-10-01
+GHS	2017-11-01
+EA1	2017-11-16
+NNI	2018-01-01
+TLI	2018-01-01
+HFA	2018-01-01
+BTS	2018-01-19
+OOE	2018-01-24
+U9Q	2018-02-01
+O7D	2018-02-26
+UC2	2018-03-01
+U23	2018-03-04
+U13	2018-03-04
 */
