@@ -11,3 +11,29 @@ select * from ansi5010.file_instance where file_instance_id in
 
 select * from ansi5010.load_file_record_data(1005);
 select * from ansi5010.file_instance_file_record where file_instance_id = 1005
+
+Good Morning Bill B/Swetta/Pavan,
+
+I did run the below :
+
+1. 80-TriNet-TriNet-Ansi5010Convert.sh  (with today's date).
+2. 95-TriNet-VSP-834X4.sh (which in turn calls reusablejobs/ansi5010_create_file.sh)
+
+File Ids created : 998, 1004, 1005
+with Number of subscribers = 0
+
+
+I did run the below sql through DBeaver on BIB :
+
+select * from ansi5010.load_file_record_data(1005);
+
+After running the above sql also, I got 0 records for the below query :
+
+select * from ansi5010.load_file_record_data(1005);
+
+Can you please guide me, where I am missing.
+
+Thank you,
+Sam.
+
+
