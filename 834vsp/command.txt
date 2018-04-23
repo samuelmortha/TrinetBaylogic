@@ -1,0 +1,19 @@
+bib01bredimft01.ux.corp.local
+slm09
+
+bib01bredimft01.ux.corp.local
+bib01bredimft01.ux.corp.local
+
+FATAL: PAM authentication failed for user "smortha"
+  
+FATAL: PAM authentication failed for user "smortha"
+  
+FATAL: PAM authentication failed for user "smortha"
+
+
+slm09bredimft01.ux.corp.local
+
+
+java -jar jars/04091214/com.trinet.cvf.filesimpl-00014-RALCAF-3145.jar "--spring.config.location=file:H:\TrinetWork\copypaster\TrinetBaylogic\834vsp\ansi.properties"
+
+
