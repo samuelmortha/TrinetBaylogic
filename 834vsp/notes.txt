@@ -37,3 +37,43 @@ Thank you,
 Sam.
 
 
+
+  Eclipse IDE for Java EE Developers	4.4.0.20140612-0500	epp.package.jee	null
+  Eclipse Quicksearch	3.7.3.201602250752-RELEASE	org.springsource.ide.eclipse.commons.quicksearch.feature.feature.group	Pivotal Software, Inc.
+  Enhanced Class Decompiler CFR Extension (Optional)	3.0.0.201709092115	org.sf.feeling.decompiler.cfr.feature.group	ECD project contributors
+  Enhanced Class Decompiler Jad Extension (Optional)	3.0.0.201709092115	org.sf.feeling.decompiler.jad.feature.group	ECD project contributors
+  Enhanced Class Decompiler JD-Core Extension (Optional)	3.0.0.201709092115	org.sf.feeling.decompiler.jd.feature.group	ECD project contributors
+  Enhanced Class Decompiler Procyon Extension (Optional)	3.0.0.201709092115	org.sf.feeling.decompiler.procyon.feature.group	ECD project contributors
+  Enhanced Class Decompiler Source (Optional)	3.0.0.201709092115	org.sf.feeling.decompiler.source.feature.group	ECD project contributors
+  Pivotal tc Server Integration for Eclipse	3.7.3.201602250927-RELEASE	com.vmware.vfabric.ide.eclipse.tcserver.feature.group	Pivotal Software, Inc.
+  Pivotal tc Server Spring Insight Integration for Eclipse	3.7.3.201602250927-RELEASE	com.vmware.vfabric.ide.eclipse.tcserver.insight.feature.group	Pivotal Software, Inc.
+  Spring Dashboard (optional)	3.7.3.201602250752-RELEASE	org.springsource.ide.eclipse.dashboard.feature.group	Pivotal Software, Inc.
+  Spring IDE AJDT Integration (optional)	3.7.3.201602250914-RELEASE	org.springframework.ide.eclipse.ajdt.feature.feature.group	Spring IDE Developers
+  Spring IDE AOP Extension (optional)	3.7.3.201602250914-RELEASE	org.springframework.ide.eclipse.aop.feature.feature.group	Spring IDE Developers
+  Spring IDE Autowire Extension (optional)	3.7.3.201602250914-RELEASE	org.springframework.ide.eclipse.autowire.feature.feature.group	Spring IDE Developers
+  Spring IDE Batch Extension (optional)	3.7.3.201602250914-RELEASE	org.springframework.ide.eclipse.batch.feature.feature.group	Spring IDE Developers
+  Spring IDE Boot Microservices Dash	3.7.3.201602250914-RELEASE	org.springframework.ide.eclipse.boot.dash.feature.feature.group	Spring IDE Developers
+  Spring IDE Core (required)	3.7.3.201602250914-RELEASE	org.springframework.ide.eclipse.feature.feature.group	Spring IDE Developers
+  Spring IDE Integration, Flex and Web Services Extension (optional)	3.7.3.201602250914-RELEASE	org.springframework.ide.eclipse.integration.feature.feature.group	Spring IDE Developers
+  Spring IDE Maven Support	3.7.3.201602250914-RELEASE	org.springframework.ide.eclipse.maven.feature.feature.group	Spring IDE Developers
+  Spring IDE Mylyn Integration (optional)	3.7.3.201602250914-RELEASE	org.springframework.ide.eclipse.mylyn.feature.feature.group	Spring IDE Developers
+  Spring IDE Security Extension (optional)	3.7.3.201602250914-RELEASE	org.springframework.ide.eclipse.security.feature.feature.group	Spring IDE Developers
+  Spring IDE Spring Data Support	3.7.3.201602250914-RELEASE	org.springframework.ide.eclipse.data.feature.feature.group	Spring IDE Developers
+  Spring IDE Web Flow Extension (optional)	3.7.3.201602250914-RELEASE	org.springframework.ide.eclipse.webflow.feature.feature.group	Spring IDE Developers
+  TestNG	6.14.0.201802161500	org.testng.eclipse.feature.group	Cedric Beust
+  TestNG M2E (Maven) Integration (Optional)	6.14.0.201802161500	org.testng.eclipse.maven.feature.feature.group	TestNG Team
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
