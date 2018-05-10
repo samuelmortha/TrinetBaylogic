@@ -1,0 +1,34 @@
+
+
+On your local machine, create a properties file like the following (this is set to create a 834 file, adjust for other file types) (note: be sure to modify bbruschi and other file paths as appropriate):
+
+
+hedi.driver=org.postgresql.Driver
+hedi.url=jdbc:postgresql://bib01bredimft01.ux.corp.local:5432/hedi?assumeMinServerVersion=9.6&sslmode=require&sqlfactory=org.postgresql.ssl.NonValidatingFactory
+hedi.userName=smortha
+hedi.password=smortha
+
+file_name=ansi5010
+
+ansi5010.file-id=944
+ansi5010.output-file-path=H\:\\SamWorkArea\\CvfRelated\\out.x12
+
+logging.level.root=WARN
+logging.level.com.trinet=DEBUG
+
+
+In IntelliJ, go to Edit Configurations and create a new "Application" configuration:
+
+    Enter a name
+    Main class: com.trinet.cvf.files.TriNetCvfFilesMain
+    Program arguments: "--spring.config.location=file:H\:\\SamWorkArea\\CvfRelated\\MFTFile.properties"
+    Working directory: %MODULE_WORKING_DIR%
+    Use classpath of module: com.trinet.cvf.filesimpl
+    JRE: select 1.8
+
+
+If you want to run from command line, use a command like:
+
+
+java -jar java/files/target/com.trinet.cvf.filesimpl-00014-RALCAF-3145.jar "--spring.config.location=file:C:\Users\bbruschi\Documents\repos\trinet-git\ansi.properties"
+
